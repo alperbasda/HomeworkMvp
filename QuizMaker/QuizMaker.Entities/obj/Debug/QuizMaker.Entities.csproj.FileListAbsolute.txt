@@ -1,0 +1,9 @@
+c:\users\alper\documents\visual studio 2015\Projects\QuizMaker\QuizMaker.Entities\bin\Debug\QuizMaker.Entities.dll
+c:\users\alper\documents\visual studio 2015\Projects\QuizMaker\QuizMaker.Entities\bin\Debug\QuizMaker.Entities.pdb
+c:\users\alper\documents\visual studio 2015\Projects\QuizMaker\QuizMaker.Entities\bin\Debug\QuizMaker.Core.dll
+c:\users\alper\documents\visual studio 2015\Projects\QuizMaker\QuizMaker.Entities\bin\Debug\EntityFramework.dll
+c:\users\alper\documents\visual studio 2015\Projects\QuizMaker\QuizMaker.Entities\bin\Debug\QuizMaker.Core.pdb
+c:\users\alper\documents\visual studio 2015\Projects\QuizMaker\QuizMaker.Entities\bin\Debug\EntityFramework.xml
+c:\users\alper\documents\visual studio 2015\Projects\QuizMaker\QuizMaker.Entities\obj\Debug\QuizMaker.Entities.csprojResolveAssemblyReference.cache
+c:\users\alper\documents\visual studio 2015\Projects\QuizMaker\QuizMaker.Entities\obj\Debug\QuizMaker.Entities.dll
+c:\users\alper\documents\visual studio 2015\Projects\QuizMaker\QuizMaker.Entities\obj\Debug\QuizMaker.Entities.pdb

@@ -1,18 +1,21 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using QuizMaker.Core.AbstractEntity;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace QuizMaker.Entities.Concrete
 {
-    public class AnswerClassic
+    public class AnswerClassic :IAnswer
     {
         [Key]
         public int Id { get; set; }
 
         public string MyAnswer { get; set; }
 
+        public decimal Highest { get; set; }
+
         public bool IsTrue { get; set; }
 
-        public decimal Highest { get; set; }
+        public int AnswerCount { get; set; }
 
         public decimal Lowest { get; set; }
 

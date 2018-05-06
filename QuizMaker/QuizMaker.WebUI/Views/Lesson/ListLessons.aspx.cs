@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Web;
-using System.Web.UI;
 using System.Web.UI.WebControls;
 using QuizMaker.Presenter.Abstract;
 using QuizMaker.Presenter.AbstractViews;
@@ -11,35 +7,63 @@ using QuizMaker.Presenter.Concrete;
 
 namespace QuizMaker.WebUI.Views.Lesson
 {
-    public partial class ListLessons : System.Web.UI.Page,ILessonView
+    public partial class ListLessons : System.Web.UI.Page, ILessonView
     {
-        private ILessonPresenter _presenter;
+        private static AbstractLessonPresenter _presenter;
         protected void Page_Load(object sender, EventArgs e)
         {
             _presenter = new LessonPresenter(this);
-            _presenter.ListLessons();
+            if (!Page.IsPostBack)
+            {
+
+            }
+            else if (Request.Form["__EVENTTARGET"] != null && Request.Form["__EVENTTARGET"] == "btnDelete")
+            {
+                DeleteEntity();
+            }
+            else if (Request.Form["__EVENTTARGET"] != null && Request.Form["__EVENTTARGET"] == "btnEdit")
+            {
+                EditEntity();
+            }
+            _presenter.ListEntityWithTable();
         }
 
-        public void GetLessonPage(IList<Entities.Concrete.Lesson> lessons)
+
+        public void ShowTable(StringBuilder buildedString)
         {
-            Content.InnerHtml = LessonListToString(lessons);
+            tableItems.InnerHtml = buildedString.ToString();
         }
 
-        public void GetLessonDetail(Entities.Concrete.Lesson lesson)
+        public void ShowDetail(Entities.Concrete.Lesson entity)
         {
             throw new NotImplementedException();
         }
 
-        public string LessonListToString(IList<Entities.Concrete.Lesson> lessons)
+
+
+        public void DeleteEntity()
         {
-            StringBuilder builder = new StringBuilder();
-            builder.AppendLine("<ul>");
-            foreach (var lesson in lessons)
-            {
-                builder.AppendLine("<li>"+lesson.LessonName+"</li>");
-            }
-            builder.AppendLine("</ul>");
-            return builder.ToString();
+            _presenter.DeleteEntity(Convert.ToInt32(Request.Form["__EVENTARGUMENT"]));
+            //Presenter katmanımdan ShowTable çağırdıgımda form postback oluyor ve buda form gönderimini tekrar tetiklediği için 
+            //kullanıcıya uyarı vermesin diye redirect atıyoruz
+            Response.Redirect(Request.RawUrl);
+
         }
+
+        public void EditEntity()
+        {
+            _presenter.UpdateEntity(new[] { new TextBox() { Text = Request.Form["lessonName"], ID = Request.Form["__EVENTARGUMENT"] } });
+            Response.Redirect(Request.RawUrl);
+        }
+
+        //Bu Kodu Yazmış bulundum asp.net te static tanımlama yapmak gerekiyormus ajax çağrısı için cok sacma
+        //Diğerlerinde sayfayı refresh edicem
+        [System.Web.Services.WebMethod]
+        public static string CreateLesson(string name)
+        {
+            return _presenter.AddEntityAjax(new[] { new TextBox() { Text = name } });
+        }
+
+
     }
 }

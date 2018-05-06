@@ -1,48 +1,39 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
 using System.Web.UI.WebControls;
-using QuizMaker.Core.EntityFramework;
 using QuizMaker.Entities.Concrete;
 using QuizMaker.Presenter.Abstract;
 using QuizMaker.Presenter.AbstractViews;
 
 namespace QuizMaker.Presenter.Concrete
 {
-    public class LessonPresenter : EfEntityBaseRepository<Lesson, QuizMakerContext>, ILessonPresenter
+    public class LessonPresenter :AbstractLessonPresenter
     {
-        ILessonView _view;
-
-        public LessonPresenter(ILessonView view)
+        public LessonPresenter(ILessonView view) 
+            : base(view)
         {
-            _view = view;
         }
 
-
-        public void ListLessons(Expression<Func<Lesson, bool>> filter = null)
+        public override void DeleteEntity(int id)
         {
-            _view.GetLessonPage(GetList(filter));
+            Context.Delete(Context.Get(s => s.Id == id));
         }
 
-        public void GetLesson(Expression<Func<Lesson, bool>> filter = null)
+        public override void AddEntity(TextBox[] textBoxName)
         {
-            _view.GetLessonDetail(Get(filter));
+            View.ShowDetail(Context.Add(new Lesson() { LessonName = textBoxName[0].Text}));
         }
 
-        public void AddLesson(TextBox textBoxName)
+        public override string AddEntityAjax(TextBox[] textBoxName)
         {
-           _view.GetLessonDetail(Add(new Lesson() {LessonName = textBoxName.Text, Id = Convert.ToInt32( textBoxName.ID) }));
+            return TableBuilder.CreateRowAjax(Context.Add(new Lesson() {LessonName = textBoxName[0].Text}));
         }
 
-        public void UpdateLesson(TextBox textBoxName)
+        public override void UpdateEntity(TextBox[] textBoxName)
         {
-           _view.GetLessonDetail(Update(new Lesson() { LessonName = textBoxName.Text, Id = Convert.ToInt32(textBoxName.ID) }));
+
+            Context.Update(new Lesson() {LessonName = textBoxName[0].Text, Id = Convert.ToInt32(textBoxName[0].ID)});
+            ListEntityWithTable();
         }
 
-        public void DeleteLesson(string lessonName,int id)
-        {
-            Delete(new Lesson() { LessonName = lessonName, Id = id });
-            _view.GetLessonPage(GetList());
-        }
     }
 }

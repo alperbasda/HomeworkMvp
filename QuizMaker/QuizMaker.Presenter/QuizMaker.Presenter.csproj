@@ -38,6 +38,9 @@
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="itextsharp">
+      <HintPath>..\..\..\..\..\Desktop\itextsharp.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -50,13 +53,43 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AbstractViews\ExamPresenter.cs" />
+    <Compile Include="AbstractViews\IAnswerExamView.cs" />
+    <Compile Include="AbstractViews\IBaseView.cs" />
+    <Compile Include="AbstractViews\ICreateExamView.cs" />
+    <Compile Include="AbstractViews\IExamView.cs" />
     <Compile Include="AbstractViews\ILessonView.cs" />
-    <Compile Include="Abstract\ILessonPresenter.cs" />
+    <Compile Include="AbstractViews\IQuestionView.cs" />
+    <Compile Include="Abstract\AbstractClassicAnswerPresenter.cs" />
+    <Compile Include="Abstract\AbstractExamPresenter.cs" />
+    <Compile Include="Abstract\AbstractQuestionPresenter.cs" />
+    <Compile Include="Abstract\AbstractTrueFalseAnswerPresenter.cs" />
+    <Compile Include="Abstract\BasePresenter.cs" />
+    <Compile Include="Abstract\AbstractLessonPresenter.cs" />
+    <Compile Include="Abstract\IAnswerExamPresenter.cs" />
+    <Compile Include="Abstract\IAnswerPresenter.cs" />
+    <Compile Include="Abstract\IExamViewPresenter.cs" />
+    <Compile Include="Concrete\AnswerExamPresenter.cs" />
+    <Compile Include="Concrete\ExamViewPresenter.cs" />
     <Compile Include="Concrete\LessonPresenter.cs" />
+    <Compile Include="Concrete\QuestionPresenter.cs" />
     <Compile Include="Concrete\QuizMakerContext.cs" />
-    <Compile Include="Migrations\201804122217537_dbFirst.cs" />
-    <Compile Include="Migrations\201804122217537_dbFirst.Designer.cs">
-      <DependentUpon>201804122217537_dbFirst.cs</DependentUpon>
+    <Compile Include="Helpers\ChainOfresponsibilityAnswerType\ClassicAnswer.cs" />
+    <Compile Include="Helpers\ChainOfresponsibilityAnswerType\TrueFalseTestAnswer.cs" />
+    <Compile Include="Helpers\ChainOfresponsibilityQuestionDifficulty\Easy.cs" />
+    <Compile Include="Helpers\ChainOfresponsibilityQuestionDifficulty\Hard.cs" />
+    <Compile Include="Helpers\ChainOfresponsibilityQuestionDifficulty\Medium.cs" />
+    <Compile Include="Helpers\ChainOfresponsibilityQuestionType\Classic.cs" />
+    <Compile Include="Helpers\ChainOfresponsibilityQuestionType\Test.cs" />
+    <Compile Include="Helpers\ChainOfresponsibilityQuestionType\TrueFalse.cs" />
+    <Compile Include="Helpers\CORHandelerBase.cs" />
+    <Compile Include="Helpers\ExamBuilder.cs" />
+    <Compile Include="Helpers\QuestionSelector.cs" />
+    <Compile Include="Helpers\SelectorBuilder.cs" />
+    <Compile Include="Helpers\TableBuilder.cs" />
+    <Compile Include="Migrations\201805061735196_asd.cs" />
+    <Compile Include="Migrations\201805061735196_asd.Designer.cs">
+      <DependentUpon>201805061735196_asd.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -76,8 +109,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201804122217537_dbFirst.resx">
-      <DependentUpon>201804122217537_dbFirst.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201805061735196_asd.resx">
+      <DependentUpon>201805061735196_asd.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

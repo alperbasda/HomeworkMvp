@@ -1,9 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using QuizMaker.Core.AbstractEntity;
 
 namespace QuizMaker.Entities.Concrete
 {
-    public class QuestionExamRelation
+    public class QuestionExamRelation : IEntity
     {
         [Key]
         public int Id { get; set; }

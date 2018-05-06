@@ -1,13 +1,11 @@
-﻿using System.Collections.Generic;
-using QuizMaker.Entities.Concrete;
+﻿using QuizMaker.Entities.Concrete;
 
 namespace QuizMaker.Presenter.AbstractViews
 {
 
-    public interface ILessonView
+    public interface ILessonView : IBaseView<Lesson>
     {
-        void GetLessonPage(IList<Lesson> lessons);
-        void GetLessonDetail(Lesson lesson);
-        string LessonListToString(IList<Lesson> lessons);
+
     }
+    
 }

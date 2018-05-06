@@ -43,6 +43,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="itextsharp">
+      <HintPath>..\..\..\..\..\Desktop\itextsharp.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.AI.Agent.Intercept, Version=1.2.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.1.2.1\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
       <Private>True</Private>
@@ -94,11 +97,44 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Contents\image\favicon.ico" />
+    <Content Include="Contents\image\quick_actions_bg.jpg" />
+    <Content Include="Contents\Style\BasicStyle.css" />
+    <Content Include="Contents\Style\CommonStyle.css" />
+    <Content Include="Contents\Style\QuestionStyle.css" />
+    <Content Include="Contents\Style\style.bundle.css" />
+    <Content Include="Contents\Style\vendors.bundle.css" />
     <Content Include="packages.config" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="scripts\CommonScripts.js" />
+    <Content Include="scripts\CreateExamJs.js" />
+    <Content Include="scripts\dashboard.js" />
+    <Content Include="scripts\fullcalendar.bundle.js" />
+    <Content Include="scripts\LessonPageScripts.js" />
+    <Content Include="scripts\MenuScript.js" />
+    <Content Include="scripts\MenuScripts.js" />
+    <Content Include="scripts\QuestionPageScript.js" />
+    <Content Include="scripts\scripts.bundle.js" />
+    <Content Include="scripts\vendors.bundle.js" />
+    <Content Include="Views\Exam\CreateExam.aspx" />
+    <Content Include="Views\Exam\ExamAnswers.aspx" />
+    <Content Include="Views\Exam\ExamDisplay.aspx" />
+    <Content Include="Views\Home\Anasayfa.aspx" />
+    <Content Include="Views\Question\ListQuestions.aspx" />
     <Content Include="Views\Shared\_Layout.Master" />
+    <Content Include="Contents\Style\fonts\font-awesome\fontawesome-webfont.ttf" />
+    <Content Include="Contents\Style\fonts\font-awesome\fontawesome-webfont.woff2" />
+    <Content Include="Contents\Style\fonts\font-awesome\fontawesome-webfont.woff" />
+    <Content Include="Contents\Style\fonts\line-awesome\line-awesome.ttf" />
+    <Content Include="Contents\Style\fonts\line-awesome\line-awesome.woff" />
+    <Content Include="Contents\Style\fonts\line-awesome\line-awesome.woff2" />
+    <Content Include="Contents\Style\fonts\flaticon\Flaticon.woff" />
+    <Content Include="Contents\Style\fonts\metronic\Metronic_fda1334c35d0f5fe2afb3afebbb6774a.woff" />
+    <Content Include="Contents\Style\fonts\metronic\Metronic_fda1334c35d0f5fe2afb3afebbb6774a.woff2" />
+    <Content Include="Contents\Style\fonts\metronic\Metronic_fda1334c35d0f5fe2afb3afebbb6774a.ttf" />
+    <Content Include="Contents\Style\fonts\flaticon\Flaticon.ttf" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -114,12 +150,47 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Views\Exam\CreateExam.aspx.cs">
+      <DependentUpon>CreateExam.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Exam\CreateExam.aspx.designer.cs">
+      <DependentUpon>CreateExam.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Exam\ExamAnswers.aspx.cs">
+      <DependentUpon>ExamAnswers.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Exam\ExamAnswers.aspx.designer.cs">
+      <DependentUpon>ExamAnswers.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Exam\ExamDisplay.aspx.cs">
+      <DependentUpon>ExamDisplay.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Exam\ExamDisplay.aspx.designer.cs">
+      <DependentUpon>ExamDisplay.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Home\Anasayfa.aspx.cs">
+      <DependentUpon>Anasayfa.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Home\Anasayfa.aspx.designer.cs">
+      <DependentUpon>Anasayfa.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Views\Lesson\ListLessons.aspx.cs">
       <DependentUpon>ListLessons.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Views\Lesson\ListLessons.aspx.designer.cs">
       <DependentUpon>ListLessons.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Question\ListQuestions.aspx.cs">
+      <DependentUpon>ListQuestions.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Question\ListQuestions.aspx.designer.cs">
+      <DependentUpon>ListQuestions.aspx</DependentUpon>
     </Compile>
     <Compile Include="Views\Shared\_Layout.Master.cs">
       <DependentUpon>_Layout.Master</DependentUpon>
@@ -130,11 +201,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Contents\" />
     <Folder Include="Views\CheckQuestion\" />
-    <Folder Include="Views\Exam\" />
-    <Folder Include="Views\Home\" />
-    <Folder Include="Views\Question\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\QuizMaker.Core\QuizMaker.Core.csproj">
@@ -142,7 +209,7 @@
       <Name>QuizMaker.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\QuizMaker.Entities\QuizMaker.Entities.csproj">
-      <Project>{EAD2EB5C-8F53-408E-89B9-36CC5D31D746}</Project>
+      <Project>{ead2eb5c-8f53-408e-89b9-36cc5d31d746}</Project>
       <Name>QuizMaker.Entities</Name>
     </ProjectReference>
     <ProjectReference Include="..\QuizMaker.Presenter\QuizMaker.Presenter.csproj">

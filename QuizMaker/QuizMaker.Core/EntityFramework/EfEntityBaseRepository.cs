@@ -1,55 +1,66 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Reflection;
 using QuizMaker.Core.AbstractEntity;
 using QuizMaker.Core.DataAccess;
 
 namespace QuizMaker.Core.EntityFramework
 {
-    public class EfEntityBaseRepository<T,Context>:IEntityRepository<T> where T : class, IEntity, new()
-    where Context : DbContext,new()
+    public class EfEntityBaseRepository<T,TContext>:IEntityRepository<T> where T : class, IEntity, new()
+    where TContext : DbContext,new()
     {
-        private Context _context;
+        protected  TContext Context;
 
         public EfEntityBaseRepository()
         {
-       
-                if(_context == null) _context = Activator.CreateInstance<Context>();
-                   
+                Context = Activator.CreateInstance<TContext>();
         }
         public List<T> GetList(Expression<Func<T, bool>> filter = null)
         {
-            return filter == null ? _context.Set<T>().ToList() : _context.Set<T>().Where(filter).ToList();
+         
+            return filter == null ? Context.Set<T>().ToList() : Context.Set<T>().Where(filter).ToList();
         }
 
         public T Get(Expression<Func<T, bool>> filter)
         {
-            return _context.Set<T>().FirstOrDefault(filter);
+            return Context.Set<T>().FirstOrDefault(filter);
+        }
+
+        public T Get(Expression<Func<T, bool>> filter, int skip)
+        {
+
+
+            return Context.Set<T>().OrderBy(s=>s.Id).Where(filter).Skip(skip).FirstOrDefault();
+        }
+
+        public int GetTableCount(Expression<Func<T, bool>> filter = null)
+        {
+            return filter!=null ? Context.Set<T>().Count(filter) : Context.Set<T>().Count();
         }
 
         public T Add(T entity)
         {
-            var addedEntity = _context.Entry(entity);
+            var addedEntity = Context.Entry(entity);
             addedEntity.State = EntityState.Added;
-            _context.SaveChanges();
+            Context.SaveChanges();
             return entity;
         }
 
         public T Update(T entity)
         {
-            var updatedEntity = _context.Entry(entity);
-            updatedEntity.State = EntityState.Modified;
-            _context.SaveChanges();
+            Context.Set<T>().AddOrUpdate(entity);   
+            Context.SaveChanges();
             return entity;
         }
 
         public bool Delete(T entity)
         {
-            var deletedEntity = _context.Entry(entity);
-            deletedEntity.State = EntityState.Deleted;
-            _context.SaveChanges();
+            Context.Set<T>().Remove(entity);
+            Context.SaveChanges();
             return true;
         }
     }

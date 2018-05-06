@@ -1,6 +1,5 @@
 ﻿using QuizMaker.Entities.Concrete;
 using System.Data.Entity;
-using System.Data.Entity.ModelConfiguration.Conventions;
 
 namespace QuizMaker.Presenter.Concrete
 {
@@ -26,8 +25,7 @@ namespace QuizMaker.Presenter.Concrete
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Conventions.Remove<ManyToManyCascadeDeleteConvention>();
-            modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
+            
         }
     }
 }

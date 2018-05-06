@@ -1,0 +1,15 @@
+﻿.cursor-point {
+    cursor: pointer;
+}
+.column-fix {
+    max-width: 200px;
+}
+.item-hidden {
+
+    visibility:hidden;
+    display:none;
+}
+.item-hidden2 {
+    visibility:hidden;
+    display:none;
+}

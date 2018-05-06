@@ -4,7 +4,7 @@ using QuizMaker.Core.AbstractEntity;
 
 namespace QuizMaker.Entities.Concrete
 {
-    public class AnswerTrueFalseTest:IEntity
+    public class AnswerTrueFalseTest:IAnswer
     {
         [Key]
         public int Id { get; set; }
